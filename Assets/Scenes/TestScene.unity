@@ -176,7 +176,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -268,7 +268,7 @@ MonoBehaviour:
   - values: 020000000400000002000000
   - values: 06000000
   - values: 03000000
-  fullBlock: {fileID: 0}
-  emptyBlock: {fileID: 0}
-  unknownBlock: {fileID: 0}
-  clueBlock: {fileID: 0}
+  fullBlock: {fileID: 3219326007136034835, guid: ffe881600393af146861fb7189d779ff, type: 3}
+  emptyBlock: {fileID: 4270178292270421286, guid: 566debd96cc368c40976a0d1a505645d, type: 3}
+  unknownBlock: {fileID: 1906059834096510468, guid: 1c85d725507a8924f95c665cad223439, type: 3}
+  clueBlock: {fileID: 7618785518894539924, guid: e796dc50072e94844bed0a8d54a51ffc, type: 3}
