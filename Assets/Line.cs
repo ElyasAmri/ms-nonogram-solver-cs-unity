@@ -1,3 +1,5 @@
+using System;
+
 public class Line
 {
 	public ClueLine clues;
@@ -7,5 +9,11 @@ public class Line
 	{
 		this.clues = clues;
 		this.cells = cells;
+	}
+
+	public int Resolve()
+	{
+		// TODO: implement this
+		throw new NotImplementedException();
 	}
 }

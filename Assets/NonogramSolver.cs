@@ -35,6 +35,12 @@ public class NonogramSolver : MonoBehaviour
                 Gizmos.DrawWireCube(new Vector3(i - offsetX, y - offsetY + rows), small);
             }
         }
-        
+    }
+
+    void Start()
+    {
+        Board board = new Board(hClues, vClues);
+        board.Solve();
+        // TODO: print the result
     }
 }
