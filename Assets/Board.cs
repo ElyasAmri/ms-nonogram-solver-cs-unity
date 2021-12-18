@@ -58,16 +58,19 @@ public class Board
         var newNextV = new List<int>();
         do
         {
+            // Basically, everytime we fill a block, that signals
+            // that the perpendicular line of what are we currently at
+            // has to be checked
             foreach (var i in nextH)
             {
                 var res = hLines[i].Resolve();
-                if (res != -1) newNextH.Add(res);
+                if (res != -1) newNextV.Add(res);
             }
 
             foreach (var i in nextV)
             {
                 var res = vLines[i].Resolve();
-                if (res != -1) newNextV.Add(res);
+                if (res != -1) newNextH.Add(res);
             }
 
             nextH = newNextH;
