@@ -250,17 +250,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hClues:
-  - values: 00000000
-  - values: 00000000
-  - values: 0000000000000000
-  - values: 0000000000000000
-  - values: 00000000
-  - values: 00000000
-  - values: 00000000
-  - values: 00000000
+  - values: 04000000
+  - values: 06000000
+  - values: 0200000002000000
+  - values: 0200000002000000
+  - values: 02000000
+  - values: 02000000
+  - values: 02000000
+  - values: 02000000
   - values: 
-  - values: 00000000
-  - values: 00000000
+  - values: 02000000
+  - values: 02000000
   vClues:
   - values: 03000000
   - values: 04000000
