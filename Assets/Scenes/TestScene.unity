@@ -250,8 +250,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hClues:
-  - values: 
-  - values: 
-  vClues:
+  - values: 00000000
+  - values: 00000000
   - values: 0000000000000000
-  - values: 000000000000000000000000
+  - values: 0000000000000000
+  - values: 00000000
+  - values: 00000000
+  - values: 00000000
+  - values: 00000000
+  - values: 
+  - values: 00000000
+  - values: 00000000
+  vClues:
+  - values: 03000000
+  - values: 04000000
+  - values: 020000000200000002000000
+  - values: 020000000400000002000000
+  - values: 06000000
+  - values: 03000000
+  fullBlock: {fileID: 0}
+  emptyBlock: {fileID: 0}
+  unknownBlock: {fileID: 0}
+  clueBlock: {fileID: 0}
