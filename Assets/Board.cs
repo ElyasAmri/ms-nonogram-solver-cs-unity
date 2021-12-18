@@ -77,4 +77,9 @@ public class Board
         } while (nextH.Any() || nextV.Any());
         // Basically, while there is still something to check
     }
+
+    public Dictionary<(int, int), Cell> GetResult()
+    {
+        return cells;
+    }
 }

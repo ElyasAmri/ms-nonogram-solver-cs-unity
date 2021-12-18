@@ -14,6 +14,6 @@ public class Line
 	public int Resolve()
 	{
 		// TODO: implement this
-		throw new NotImplementedException();
+		return -1;
 	}
 }
