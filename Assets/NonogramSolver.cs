@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NonogramSolver : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class NonogramSolver : MonoBehaviour
                 CreateBlock(new Vector3(j - offsetX, i - offsetY), GetTypeFromBool(result[(i, j)].value));
             for (var x = 0; x < hClues[i].values.Count; x++)
             {
-                CreateBlock(new Vector3(- x - offsetX - 1, rows - i - 1 - offsetY), BlockType.Clue);
+                CreateClue(new Vector3(- x - offsetX - 1, rows - i - 1 - offsetY), hClues[i].values[x]);
             }
         }
 
@@ -69,7 +70,7 @@ public class NonogramSolver : MonoBehaviour
         {
             for (var y = 0; y < vClues[i].values.Count; y++)
             {
-                CreateBlock(new Vector3(i - offsetX, y - offsetY + rows), BlockType.Clue);
+                CreateClue(new Vector3(i - offsetX, y - offsetY + rows), vClues[i].values[y]);
             }
         }
 
@@ -93,6 +94,12 @@ public class NonogramSolver : MonoBehaviour
                     BlockType.Unknown => unknownBlock,
                     _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
                 }, position, Quaternion.identity, transform);
+        }
+
+        void CreateClue(Vector3 position, int value)
+        {
+            Instantiate(clueBlock, position, Quaternion.identity, transform)
+                .GetComponentInChildren<Text>().text = value.ToString();
         }
     }
 }
