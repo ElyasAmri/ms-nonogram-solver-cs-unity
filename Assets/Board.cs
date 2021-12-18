@@ -63,14 +63,12 @@ public class Board
             // has to be checked
             foreach (var i in nextH)
             {
-                var res = hLines[i].Resolve();
-                if (res != -1) newNextV.Add(res);
+                newNextV.AddRange(hLines[i].Resolve());
             }
 
             foreach (var i in nextV)
             {
-                var res = vLines[i].Resolve();
-                if (res != -1) newNextH.Add(res);
+                newNextH.AddRange(vLines[i].Resolve());
             }
 
             nextH = newNextH;
