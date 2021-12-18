@@ -34,7 +34,7 @@ public class Board
             Cell[] lCells = new Cell[cols];
             for (var j = 0; j < cols; j++)
             {
-                lCells[i] = cells[(i, j)];
+                lCells[j] = cells[(i, j)];
             }
             hLines[i] = new Line(lCells, hClues[i]);
         }
@@ -44,7 +44,7 @@ public class Board
             Cell[] lCells = new Cell[rows];
             for (var j = 0; j < rows; j++)
             {
-                lCells[i] = cells[(j, i)];
+                lCells[j] = cells[(j, i)];
             }
             vLines[i] = new Line(lCells, vClues[i]);
         }
