@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class Board
 {
@@ -52,12 +53,16 @@ public class Board
     
     public void Solve()
     {
-        var nextH = Enumerable.Range(0, rows).ToList();
-        var nextV = Enumerable.Range(0, cols).ToList();
+        var nextH = new List<int>(Enumerable.Range(0, rows));
+        var nextV = new List<int>(Enumerable.Range(0, cols));
         var newNextH = new List<int>();
         var newNextV = new List<int>();
+
+        var loops = 0;
+        
         do
         {
+            loops++;
             // Basically, everytime we fill a block, that signals
             // that the perpendicular line of what are we currently at
             // has to be checked
@@ -71,12 +76,16 @@ public class Board
                 newNextH.AddRange(vLines[i].Resolve());
             }
 
-            nextH = newNextH;
-            nextV = newNextV;
+            nextH.Clear();
+            nextV.Clear();
+            nextH.AddRange(newNextH);
+            nextV.AddRange(newNextV);
             newNextH.Clear();
             newNextV.Clear();
-        } while (nextH.Any() || nextV.Any());
+        } while (nextH.Count != 0 || nextV.Count != 0);
         // Basically, while there is still something to check
+
+        Debug.Log($"Loops took: {loops}");
     }
 
     public Dictionary<(int, int), Cell> GetResult()

@@ -59,7 +59,7 @@ public class NonogramSolver : MonoBehaviour
         for (var i = 0; i < rows; i++)
         {
             for (var j = 0; j < cols; j++)
-                CreateBlock(new Vector3(j - offsetX, i - offsetY), GetTypeFromBool(result[(i, j)].value));
+                CreateBlock(new Vector3(j - offsetX, i - offsetY), GetTypeFromBool(result[(rows - i - 1, j)].value));
             for (var x = 0; x < hClues[i].values.Count; x++)
             {
                 CreateClue(new Vector3(- x - offsetX - 1, rows - i - 1 - offsetY), hClues[i].values[x]);

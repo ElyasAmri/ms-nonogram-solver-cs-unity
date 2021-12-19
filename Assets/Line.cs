@@ -4,7 +4,6 @@ using System.Linq;
 
 public class Line
 {
-	ClueLine clues;
 	Cell[] cells;
 	int length;
 
@@ -12,12 +11,31 @@ public class Line
 
 	public Line(Cell[] cells, ClueLine clues)
 	{
-		this.clues = clues;
 		this.cells = cells;
-		this.length = cells.Length;
+		length = cells.Length;
 
-		possibilities = new List<bool[]>();
-		// TODO: make permutations from a utility
+		possibilities = Utils.GeneratePermutations(clues, length);
+		possibilities.RemoveAll(poss =>
+		{
+			var index = 0;
+			foreach (var clue in clues.values)
+			{
+				// Skip till the first true
+				for (; index < length && !poss[index]; index++) ;
+				
+				var capture = 1;
+				index++;
+				
+				// Skip till the first false
+				for (; index < length && poss[index]; index++, capture++) ;
+				
+				// Either bigger or smaller than intended
+				if (capture != clue)
+					return true;
+			}
+
+			return false;
+		});
 	}
 
 	public int[] Resolve()
@@ -25,7 +43,7 @@ public class Line
 		List<int> ret = new List<int>();
 
 		// A simple measure to skip rolling all of the cells for nothing
-		if (cells.All(cell => !cell.value.HasValue))
+		if (!cells.Any(cell => cell.value.HasValue))
 			goto skipRemoval;
 		
 		// Remove failed possibilities
