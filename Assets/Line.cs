@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Line
 {
-	Cell[] cells;
+	public Cell[] cells { get; }
 	int length;
 
 	List<bool[]> possibilities;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,32 +46,35 @@ public class NonogramSolver : MonoBehaviour
         }
     }
 
-    void Start()
+    IEnumerator Start()
     {
-        Board board = new Board(hClues, vClues);
-        board.Solve();
-        var result = board.GetResult();
-        // TODO: print the result
         var rows = hClues.Count;
         var cols = vClues.Count;
         var offsetX = cols / 2f - 0.5F;
         var offsetY = rows / 2f - 0.5F;
-
         for (var i = 0; i < rows; i++)
         {
-            for (var j = 0; j < cols; j++)
-                CreateBlock(new Vector3(j - offsetX, i - offsetY), GetTypeFromBool(result[(rows - i - 1, j)].value));
             for (var x = 0; x < hClues[i].values.Count; x++)
             {
                 CreateClue(new Vector3(- x - offsetX - 1, rows - i - 1 - offsetY), hClues[i].values[x]);
             }
         }
-
+        
         for (var i = 0; i < cols; i++)
         {
             for (var y = 0; y < vClues[i].values.Count; y++)
             {
                 CreateClue(new Vector3(i - offsetX, y - offsetY + rows), vClues[i].values[y]);
+            }
+        }
+        
+        Board board = new Board(hClues, vClues);
+        foreach (var newCells in board.SolveSteps())
+        {
+            foreach (var (i, j, s) in newCells)
+            {
+                CreateBlock(new Vector3(j - offsetX, rows - i - 1 - offsetY), GetTypeFromBool(s));
+                yield return new WaitForSeconds(0.25f);
             }
         }
 

@@ -88,6 +88,43 @@ public class Board
         Debug.Log($"Loops took: {loops}");
     }
 
+    public IEnumerable<IEnumerable<(int, int, bool?)>> SolveSteps()
+    {
+        var nextH = new List<int>(Enumerable.Range(0, rows));
+        var nextV = new List<int>(Enumerable.Range(0, cols));
+        var newNextH = new List<int>();
+        var newNextV = new List<int>();
+
+        do
+        {
+            // Basically, everytime we fill a block, that signals
+            // that the perpendicular line of what are we currently at
+            // has to be checked
+            foreach (var i in nextH)
+            {
+                var res = hLines[i].Resolve();
+                newNextV.AddRange(res);
+                if(res.Length > 0)
+                    yield return res.Select(y => (i, y, hLines[i].cells[y].value));
+            }
+
+            foreach (var i in nextV)
+            {
+                var res = vLines[i].Resolve();
+                newNextH.AddRange(res);
+                if(res.Length > 0)
+                    yield return res.Select(x => (x, i, vLines[i].cells[x].value));
+            }
+
+            nextH.Clear();
+            nextV.Clear();
+            nextH.AddRange(newNextH);
+            nextV.AddRange(newNextV);
+            newNextH.Clear();
+            newNextV.Clear();
+        } while (nextH.Count != 0 || nextV.Count != 0);
+    }
+
     public Dictionary<(int, int), Cell> GetResult()
     {
         return cells;
