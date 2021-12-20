@@ -4,5 +4,5 @@ using System.Collections.Generic;
 [Serializable]
 public class ClueLine
 {
-    public List<int> values;
+	public List<int> values;
 }

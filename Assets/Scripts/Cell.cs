@@ -1,4 +1,4 @@
 public class Cell
 {
-    public bool? value = null;
+	public bool? value = null;
 }

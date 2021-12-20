@@ -22,13 +22,13 @@ public class Line
 			{
 				// Skip till the first true
 				for (; index < length && !poss[index]; index++) ;
-				
+
 				var capture = 1;
 				index++;
-				
+
 				// Skip till the first false
 				for (; index < length && poss[index]; index++, capture++) ;
-				
+
 				// Either bigger or smaller than intended
 				if (capture != clue)
 					return true;
@@ -45,7 +45,7 @@ public class Line
 		// A simple measure to skip rolling all of the cells for nothing
 		if (!cells.Any(cell => cell.value.HasValue))
 			goto skipRemoval;
-		
+
 		// Remove failed possibilities
 		possibilities.RemoveAll(poss =>
 		{
@@ -56,33 +56,34 @@ public class Line
 				if (cells[i].value.HasValue && poss[i] != cells[i].value.Value)
 					return true;
 			}
+
 			return false;
 		});
-		
+
 		skipRemoval: ;
-		
+
 		// Determine if there is a new cell after the removal
 		for (var i = 0; i < length; i++)
 		{
 			// ignore already calculated cells
-			if(cells[i].value.HasValue) 
+			if (cells[i].value.HasValue)
 				continue;
-			
+
 			// check if all possibilities for one cell are true
-			if (possibilities.TrueForAll(poss => poss[i])) 
+			if (possibilities.TrueForAll(poss => poss[i]))
 				cells[i].value = true;
-			
+
 			// check if all possibilities for one cell are false
 			else if (possibilities.TrueForAll(poss => !poss[i]))
 				cells[i].value = false;
-			
+
 			// Failed to find such case
 			else continue;
-			
+
 			// Add if not failed
 			ret.Add(i);
 		}
-		
+
 		return ret.Count == 0 ? Array.Empty<int>() : ret.ToArray();
 	}
 }
