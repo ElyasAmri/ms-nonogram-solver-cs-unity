@@ -46,7 +46,7 @@ public class NonogramSolver : MonoBehaviour
 		{
 			for (var j = 0; j < cols; j++)
 				Gizmos.DrawWireCube(new Vector3(j - offsetX, i - offsetY), min);
-			for (var x = 0; x < hClues[i].values.Count; x++)
+			for (var x = 0; x < hClues[i].values.Length; x++)
 			{
 				Gizmos.DrawWireCube(new Vector3(-x - offsetX - 1, rows - i - 1 - offsetY), small);
 			}
@@ -54,7 +54,7 @@ public class NonogramSolver : MonoBehaviour
 
 		for (var i = 0; i < cols; i++)
 		{
-			for (var y = 0; y < vClues[i].values.Count; y++)
+			for (var y = 0; y < vClues[i].values.Length; y++)
 			{
 				Gizmos.DrawWireCube(new Vector3(i - offsetX, y - offsetY + rows), small);
 			}
@@ -92,7 +92,7 @@ public class NonogramSolver : MonoBehaviour
 	{
 		Board board = new Board(hClues, vClues);
 		board.Solve();
-		var result = board.GetResult();
+		var result = board.cells;
 
 		for (var i = 0; i < rows; i++)
 		{
@@ -105,7 +105,7 @@ public class NonogramSolver : MonoBehaviour
 	{
 		for (var i = 0; i < rows; i++)
 		{
-			for (var x = 0; x < hClues[i].values.Count; x++)
+			for (var x = 0; x < hClues[i].values.Length; x++)
 			{
 				CreateClue(new Vector3(-x - offsetX - 1, rows - i - 1 - offsetY), hClues[i].values[x]);
 			}
@@ -113,7 +113,7 @@ public class NonogramSolver : MonoBehaviour
 
 		for (var i = 0; i < cols; i++)
 		{
-			for (var y = 0; y < vClues[i].values.Count; y++)
+			for (var y = 0; y < vClues[i].values.Length; y++)
 			{
 				CreateClue(new Vector3(i - offsetX, y - offsetY + rows), vClues[i].values[y]);
 			}

@@ -10,7 +10,7 @@ public class Board
 	Line[] hLines;
 	Line[] vLines;
 
-	Dictionary<(int, int), Cell> cells;
+	public Dictionary<(int, int), Cell> cells { get; }
 
 	public Board(List<ClueLine> hClues, List<ClueLine> vClues)
 	{
@@ -80,8 +80,8 @@ public class Board
 
 			nextH.Clear();
 			nextV.Clear();
-			nextH.AddRange(newNextH);
-			nextV.AddRange(newNextV);
+			nextH.AddRange(newNextH.Distinct());
+			nextV.AddRange(newNextV.Distinct());
 			newNextH.Clear();
 			newNextV.Clear();
 		} while (nextH.Count != 0 || nextV.Count != 0);
@@ -120,15 +120,10 @@ public class Board
 
 			nextH.Clear();
 			nextV.Clear();
-			nextH.AddRange(newNextH);
-			nextV.AddRange(newNextV);
+			nextH.AddRange(newNextH.Distinct());
+			nextV.AddRange(newNextV.Distinct());
 			newNextH.Clear();
 			newNextV.Clear();
 		} while (nextH.Count != 0 || nextV.Count != 0);
-	}
-
-	public Dictionary<(int, int), Cell> GetResult()
-	{
-		return cells;
 	}
 }
