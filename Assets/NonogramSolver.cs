@@ -15,6 +15,7 @@ public class NonogramSolver : MonoBehaviour
     [SerializeField] GameObject emptyBlock;
     [SerializeField] GameObject unknownBlock;
     [SerializeField] GameObject clueBlock;
+    [SerializeField] float frameTime = 0.25f;
 
     void OnDrawGizmos()
     {
@@ -69,12 +70,13 @@ public class NonogramSolver : MonoBehaviour
         }
         
         Board board = new Board(hClues, vClues);
+        var waitTime = new WaitForSeconds(frameTime);
         foreach (var newCells in board.SolveSteps())
         {
             foreach (var (i, j, s) in newCells)
             {
                 CreateBlock(new Vector3(j - offsetX, rows - i - 1 - offsetY), GetTypeFromBool(s));
-                yield return new WaitForSeconds(0.25f);
+                yield return waitTime;
             }
         }
 
