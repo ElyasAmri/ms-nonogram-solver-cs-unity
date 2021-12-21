@@ -97,7 +97,7 @@ public class NonogramSolver : MonoBehaviour
 		for (var i = 0; i < rows; i++)
 		{
 			for (var j = 0; j < cols; j++)
-				CreateBlock(new Vector3(j - offsetX, rows - i - 1 - offsetY), GetTypeFromBool(result[(i, j)].value));
+				CreateBlock(new Vector3(j - offsetX, rows - i - 1 - offsetY), GetTypeFromBool(result[i, j].value));
 		}
 	}
 

@@ -10,7 +10,7 @@ public class Board
 	Line[] hLines;
 	Line[] vLines;
 
-	public Dictionary<(int, int), Cell> cells { get; }
+	public Cell[,] cells { get; }
 
 	public Board(List<ClueLine> hClues, List<ClueLine> vClues)
 	{
@@ -20,13 +20,13 @@ public class Board
 		hLines = new Line[rows];
 		vLines = new Line[cols];
 
-		cells = new Dictionary<(int, int), Cell>();
+		cells = new Cell[rows, cols];
 
 		for (var i = 0; i < rows; i++)
 		{
 			for (var j = 0; j < cols; j++)
 			{
-				cells[(i, j)] = new Cell();
+				cells[i, j] = new Cell();
 			}
 		}
 
@@ -35,7 +35,7 @@ public class Board
 			Cell[] lCells = new Cell[cols];
 			for (var j = 0; j < cols; j++)
 			{
-				lCells[j] = cells[(i, j)];
+				lCells[j] = cells[i, j];
 			}
 
 			hLines[i] = new Line(lCells, hClues[i]);
@@ -46,7 +46,7 @@ public class Board
 			Cell[] lCells = new Cell[rows];
 			for (var j = 0; j < rows; j++)
 			{
-				lCells[j] = cells[(j, i)];
+				lCells[j] = cells[j, i];
 			}
 
 			vLines[i] = new Line(lCells, vClues[i]);
