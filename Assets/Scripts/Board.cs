@@ -68,14 +68,14 @@ public class Board
 			// Basically, everytime we fill a block, that signals
 			// that the perpendicular line of what are we currently at
 			// has to be checked
-			foreach (var i in nextH)
+			foreach (var line in nextH.Select(i => hLines[i]).OrderByDescending(l => l.sum))
 			{
-				newNextV.AddRange(hLines[i].Resolve());
+				newNextV.AddRange(line.Resolve());
 			}
 
-			foreach (var i in nextV)
+			foreach (var line in nextV.Select(i => vLines[i]).OrderByDescending(l => l.sum))
 			{
-				newNextH.AddRange(vLines[i].Resolve());
+				newNextH.AddRange(line.Resolve());
 			}
 
 			nextH.Clear();
@@ -102,20 +102,20 @@ public class Board
 			// Basically, everytime we fill a block, that signals
 			// that the perpendicular line of what are we currently at
 			// has to be checked
-			foreach (var i in nextH)
+			foreach (var (l, i) in nextH.Select(i => (hLines[i], i)).OrderByDescending(l => l.Item1.sum))
 			{
-				var res = hLines[i].Resolve();
+				var res = l.Resolve();
 				newNextV.AddRange(res);
 				if (res.Length > 0)
-					yield return res.Select(y => (i, y, hLines[i].cells[y].value));
+					yield return res.Select(y => (i, y, l.cells[y].value));
 			}
 
-			foreach (var i in nextV)
+			foreach (var (l, i) in nextV.Select(i => (vLines[i], i)).OrderByDescending(l => l.Item1.sum))
 			{
-				var res = vLines[i].Resolve();
+				var res = l.Resolve();
 				newNextH.AddRange(res);
 				if (res.Length > 0)
-					yield return res.Select(x => (x, i, vLines[i].cells[x].value));
+					yield return res.Select(x => (x, i, l.cells[x].value));
 			}
 
 			nextH.Clear();

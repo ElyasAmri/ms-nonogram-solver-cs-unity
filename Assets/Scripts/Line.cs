@@ -5,6 +5,7 @@ using System.Linq;
 public class Line
 {
 	public Cell[] cells { get; }
+	public int sum { get; }
 	int length;
 
 	List<bool[]> possibilities;
@@ -13,6 +14,7 @@ public class Line
 	{
 		this.cells = cells;
 		length = cells.Length;
+		sum = clues.values.Sum() + clues.values.Length - 1;
 
 		possibilities = Utils.GeneratePermutations(clues, length);
 		possibilities.RemoveAll(poss =>
